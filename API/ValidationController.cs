@@ -30,7 +30,7 @@ namespace EIRLSS_Data_API.API
             }
             else
             {
-                return Content(HttpStatusCode.NotFound, "Submitted license number has not been reported to the DVLA");
+                return Content(HttpStatusCode.OK, "Submitted license number has not been reported to the DVLA");
             }
         }
 
@@ -48,12 +48,12 @@ namespace EIRLSS_Data_API.API
             }
             else
             {
-                if (result.ErrorMessage != "")
+                if (!string.IsNullOrEmpty(result.ErrorMessage))
                 {
                     return Content(HttpStatusCode.InternalServerError, result.ErrorMessage);
                 }
 
-                return Content(HttpStatusCode.NotFound, "Submitted individual is not present on the ABI database");
+                return Content(HttpStatusCode.OK, "Submitted individual is not present on the ABI database");
             }
         }
     }

@@ -92,6 +92,7 @@ namespace EIRLSS_Data_API.ServiceLayer
                     new OleDbCommand(
                         $"SELECT COUNT(*) from fraudulent_claim_data WHERE FAMILY_NAME='{familyName}' AND FORENAMES='{forenames}' AND ADDRESS_OF_CLAIM='{address}'", connection);
                 OleDbDataReader reader = command.ExecuteReader();
+
                 while (reader.Read())
                 {
                     count = (int)reader[0];
@@ -99,11 +100,11 @@ namespace EIRLSS_Data_API.ServiceLayer
 
                 if (count > 0)
                 {
-                    return new ServiceResponse {Success = true};
+                    return new ServiceResponse {Success = true, ErrorMessage = null};
                 }
                 else
                 {
-                    return new ServiceResponse {Success = false};
+                    return new ServiceResponse {Success = false, ErrorMessage = null};
                 }
             }
             catch (Exception ex)
